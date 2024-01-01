@@ -27,6 +27,7 @@ class CardServiceImpl(
         // TODO: 만약 해당하는 카드 ID에 해당하는 카드가 없다면 throw ModelNotFoundExeption
         // TODO: DB에서 카드 ID 기반으로 카드를 가져와서  CardResponse 감싸 변환 후 반환
         val card = cardRepository.findByIdOrNull(cardId) ?: throw ModelNotFoundException("Card", cardId)
+
         return card.toResponse()
     }
 
@@ -63,17 +64,22 @@ class CardServiceImpl(
         if (card.title == "") {
             throw IllegalArgumentException("please enter your todo title")
         }
-
         return cardRepository.save(card).toResponse()
     }
 
 
     @Transactional
-    override fun deleteCard(cardId: Long) {
+    override fun deleteByYn(cardId: Long): CardResponse {
         // TODO: 만약 해당하는 카드 ID에 해당하는 카드가 없다면 throw ModelNotFoundExeption
         // TODO: DB에서 카드 ID에 해당하는 Card(Entitiy)를 삭제
-        val card = cardRepository.findByIdOrNull(cardId) ?: throw ModelNotFoundException("Card", cardId)
-        return cardRepository.delete(card)
+//        val card = cardRepository.findByIdOrNull(cardId) ?: throw ModelNotFoundException("Card", cardId)
+//         return cardRepository.delete(card)
 
+        val card = cardRepository.findByIdOrNull(cardId) ?: throw ModelNotFoundException("Card", cardId)
+
+            status = true
+
+        return cardRepository.save(card).toResponse()
     }
+
 }

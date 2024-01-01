@@ -6,6 +6,8 @@ import com.teamsparta.todo.domain.card.dto.UpdateCardRequest
 
 interface CardService {
 
+    var status: Boolean
+
     fun getAllCardList(): List<CardResponse>
 
     fun getCardById(cardId: Long): CardResponse
@@ -14,6 +16,5 @@ interface CardService {
 
     fun updateCard(cardId: Long, request: UpdateCardRequest): CardResponse
 
-    fun deleteCard(cardId: Long)
-
+    fun deleteByYn(cardId: Long): CardResponse
 }

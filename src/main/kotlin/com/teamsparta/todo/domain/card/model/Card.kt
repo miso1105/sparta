@@ -36,5 +36,6 @@ fun Card.toResponse(): CardResponse {
         title = title,
         plans = plans,
         createdDate = LocalDateTime.now(),
+        status = false,
     )
 }
